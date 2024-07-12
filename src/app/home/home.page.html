@@ -14,6 +14,14 @@
   </ion-header>
 
   <div id="container">
-    <ion-button (click)="echo()">Camera</ion-button>
+    <ion-button (click)="takePhoto()">Camera</ion-button>
   </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let photo of photos">
+        <ion-img [src]="photo.filePath" (click)="viewPhoto(photo.filePath)"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+

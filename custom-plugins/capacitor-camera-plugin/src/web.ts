@@ -3,8 +3,8 @@ import { WebPlugin } from '@capacitor/core';
 import type { CameraPlugin } from './definitions';
 
 export class CameraWeb extends WebPlugin implements CameraPlugin {
-  async echo(options: { value: string }): Promise<{ value: string }> {
-    console.log('ECHO', options);
-    return options;
+  async takePhoto(): Promise<{ filePath: string }> {
+    console.log('Taking a photo (web version)');
+    return { filePath: 'path/to/photo.jpg' };
   }
 }

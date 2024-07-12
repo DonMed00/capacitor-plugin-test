@@ -1,3 +1,3 @@
 export interface CameraPlugin {
-  echo(options: { value: string }): Promise<{ value: string }>;
+  takePhoto(): Promise<{ filePath: string }>;
 }
