@@ -8,12 +8,12 @@ Steps to use the plugin:
 3) Check that it works fine.
 
 
-# In app:
+## In app:
 Once the app is active, click on 'Camera' button. The first time, you must accept the required permissions.
 After that, you can take a photo and interact with it in the app.
 
 
-# Tech details:
+## Tech details:
 The Camera Plugin provides functionality to capture photos using the device's camera within a Capacitor-based application on Android.
 Capacitor Integration: Integrated as a Capacitor plugin (@CapacitorPlugin) with defined request codes (102 for camera operations).
 
