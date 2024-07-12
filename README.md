@@ -18,6 +18,5 @@ The Camera Plugin provides functionality to capture photos using the device's ca
 Capacitor Integration: Integrated as a Capacitor plugin (@CapacitorPlugin) with defined request codes (102 for camera operations).
 
 Plugin Methods:
-- takePhoto(PluginCall call): Initiates the process to capture a photo, requesting permissions if necessary, and opening the camera.
-- handleOnActivityResult(int requestCode, int resultCode, Intent data): Handles the result of the camera operation, resolving or rejecting the call based on success or failure.
-- getPathFromContentUri(Uri contentUri): Utility method to retrieve the file path from a content URI, ensuring compatibility across different Android versions.
+- takePhoto(): Initiates the process to capture a photo, requesting permissions if necessary, and opening the camera.
+- getPhotos(): This method retrieves photos from the device's external storage, converts them to base64 format, and returns them as an array of strings representing image data URIs.

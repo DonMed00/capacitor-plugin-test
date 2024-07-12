@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class CameraService {
-  private photosSubject = new BehaviorSubject<{ filePath: string }[]>([]);
+  private photosSubject = new BehaviorSubject<string[]>([]);
   public photos$ = this.photosSubject.asObservable();
 
   constructor() {}
@@ -13,27 +13,19 @@ export class CameraService {
   async takePhoto() {
     try {
       const result = await Camera.takePhoto();
+      this.loadPhotos();
       console.log('Photo saved to:', result.filePath);
-      this.photosSubject.next([...this.photosSubject.getValue(), result]);
-      this.save();
     } catch (error) {
       console.error('Error taking photo:', error);
     }
   }
 
-  loadSaved() {
-    const photoList = localStorage.getItem('photos');
-    if (photoList) {
-      const parsedPhotos = JSON.parse(photoList);
-      this.photosSubject.next(parsedPhotos);
+  async loadPhotos() {
+    try {
+      const result = await Camera.getPhotos();
+      this.photosSubject.next(result.photos);
+    } catch (error) {
+      console.error('Error al cargar las fotos:', error);
     }
-    return this.photosSubject.getValue();
-  }
-
-  private save() {
-    localStorage.setItem(
-      'photos',
-      JSON.stringify(this.photosSubject.getValue())
-    );
   }
 }

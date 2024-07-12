@@ -14,14 +14,19 @@
   </ion-header>
 
   <div id="container">
-    <ion-button (click)="takePhoto()">Camera</ion-button>
+    <ion-button expand="full" (click)="takePhoto()">Camera</ion-button>
   </div>
   <ion-grid>
     <ion-row>
-      <ion-col size="6" *ngFor="let photo of photos">
-        <ion-img [src]="photo.filePath" (click)="viewPhoto(photo.filePath)"></ion-img>
+      <ion-col size="3" *ngFor="let photo of photos">
+        
+          <ion-img [src]="photo" (click)="toggleExpanded(photo)"></ion-img>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <div *ngIf="expandedPhoto" class="expanded-image" (click)="toggleExpanded()">
+    <ion-img [src]="expandedPhoto"></ion-img>
+  </div>
 </ion-content>
 

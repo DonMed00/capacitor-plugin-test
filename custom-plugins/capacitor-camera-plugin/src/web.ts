@@ -7,4 +7,8 @@ export class CameraWeb extends WebPlugin implements CameraPlugin {
     console.log('Taking a photo (web version)');
     return { filePath: 'path/to/photo.jpg' };
   }
+  async getPhotos(): Promise<{ photos: string[] }> {
+    console.log('Displaying photos (web version)');
+    return { photos: [] };
+  }
 }

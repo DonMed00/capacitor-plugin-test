@@ -11,8 +11,6 @@ import {
   IonImg,
 } from '@ionic/angular/standalone';
 import { CameraService } from '../core/services/camera.service';
-import { ModalController } from '@ionic/angular';
-import { PhotoViewerComponent } from '../photo-viewer/photo-viewer.component';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 
@@ -20,7 +18,6 @@ import { Subscription } from 'rxjs';
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  providers: [ModalController],
   standalone: true,
   imports: [
     IonImg,
@@ -36,19 +33,17 @@ import { Subscription } from 'rxjs';
   ],
 })
 export class HomePage {
-  photos: { filePath: string }[] = [];
+  photos: string[] = [];
   private photosSubscription: Subscription = new Subscription();
+  expandedPhoto: string | null = null;
 
-  constructor(
-    public cameraService: CameraService,
-    private modalController: ModalController
-  ) {}
+  constructor(public cameraService: CameraService) {}
 
   ngOnInit() {
+    this.cameraService.loadPhotos();
     this.photosSubscription = this.cameraService.photos$.subscribe((photos) => {
       this.photos = photos;
     });
-    this.cameraService.loadSaved();
   }
 
   ngOnDestroy() {
@@ -61,11 +56,11 @@ export class HomePage {
     await this.cameraService.takePhoto();
   }
 
-  async viewPhoto(photo: string) {
-    const modal = await this.modalController.create({
-      component: PhotoViewerComponent,
-      componentProps: { photo },
-    });
-    return await modal.present();
+  toggleExpanded(photo?: string) {
+    if (photo) {
+      this.expandedPhoto = photo;
+    } else {
+      this.expandedPhoto = null;
+    }
   }
 }
